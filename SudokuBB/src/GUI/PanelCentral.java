@@ -162,10 +162,6 @@ public class PanelCentral extends JPanel implements MouseListener,ActionListener
             int dim = tab.getDIMENSION();
             int ancho = this.getWidth() / dim;
             int alto = this.getHeight() / dim;
-            System.out.println("X "+e.getX());
-            System.out.println("Y "+(e.getY()-80));
-            System.out.println("ancho "+ancho);
-            System.out.println("alto "+alto);
             int row = (e.getY() - 80) / alto;
             int col = (e.getX()) / ancho;
             InsertValue iv = new InsertValue(prog, row, col);

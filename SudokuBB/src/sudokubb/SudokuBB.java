@@ -133,9 +133,6 @@ public class SudokuBB {
             int val = Integer.parseInt(aux[1]);
             int row = Integer.parseInt(aux[2]);
             int col = Integer.parseInt(aux[3]);
-            System.out.println("row "+row);
-            System.out.println("col "+col);
-            System.out.println("val "+val);
             tablero.setElement(row, col, val);
             tablero.addPista();
             gui.setDatos(tablero, soluciones);
