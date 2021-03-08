@@ -4,6 +4,7 @@ Clase que actua de panel en el que se pinta el tablero NxN
 package GUI;
 
 import Datos.Soluciones;
+import sudokubb.SudokuBB;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,19 +14,32 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import Datos.Tablero;
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-public class PanelCentral extends JPanel implements MouseListener{
+public class PanelCentral extends JPanel implements MouseListener,ActionListener {
 
+    private SudokuBB prog;
     private Tablero tab;
     private Tablero solucionActual;
     private Soluciones soluciones;
     private boolean todas;
+    private JDialog jd;
+    private JButton ok;
     
-    public PanelCentral(Tablero tab,Soluciones sol) {
+    
+    public PanelCentral(SudokuBB prog, Tablero tab,Soluciones sol) {
+        this.prog = prog;
         this.tab = tab;
         this.soluciones = sol;
     }
@@ -130,11 +144,39 @@ public class PanelCentral extends JPanel implements MouseListener{
         this.soluciones = soluciones;
     }
 
+    public void insertVal(){
+        
+    }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
-       if (todas) {
+        if (todas) {
             solucionActual = soluciones.nextSolucion();
             repintar(1);
+        }
+        else {
+            jd = new JDialog();
+            jd.setModal(true);
+            jd.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+            jd.setLayout(new BorderLayout());
+            int dim = tab.getDIMENSION();
+            int ancho = this.getWidth() / dim;
+            int alto = this.getHeight() / dim;
+            System.out.println("X "+e.getX());
+            System.out.println("Y "+(e.getY()-80));
+            System.out.println("ancho "+ancho);
+            System.out.println("alto "+alto);
+            int row = (e.getY() - 80) / alto;
+            int col = (e.getX()) / ancho;
+            InsertValue iv = new InsertValue(prog, row, col);
+            jd.add(iv);
+            ok = new JButton("Ok");
+            ok.addActionListener(this);
+            jd.add(ok, BorderLayout.SOUTH);
+            jd.pack();
+            jd.setLocation(300, 300);         
+            jd.setVisible(true);
+            
         }
     }
 
@@ -157,6 +199,13 @@ public class PanelCentral extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == ok) {
+            jd.dispose();
+        }
+    }
+    
 
    
 }

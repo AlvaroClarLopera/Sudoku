@@ -52,7 +52,7 @@ public class Gui implements ActionListener {
         barra.setBackground(new Color(108,160,220));
         contenedor.add(BorderLayout.PAGE_START, barra);
         barra.addSeparator(new Dimension(x/2-250, 0));
-        central = new PanelCentral(tab,soluciones);
+        central = new PanelCentral(prog,tab,soluciones);
         contenedor.addMouseListener(central);
         contenedor.add(BorderLayout.CENTER, central);
         vent.add(contenedor);

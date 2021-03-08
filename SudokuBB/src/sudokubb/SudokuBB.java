@@ -25,7 +25,6 @@ public class SudokuBB {
     public Gui gui;
     public Tablero tablero;
     public Soluciones soluciones;
-    private int NXJUAN;
     private int dim;
     private int pistas;
     public static void main(String[] args) {
@@ -129,6 +128,18 @@ public class SudokuBB {
             soluciones = new Soluciones(500);
             gui.setDatos(tablero,soluciones);
             gui.repintar(0);
-        } 
+        } else if (s.startsWith("addValue-")){
+            String [] aux = s.split("-");
+            int val = Integer.parseInt(aux[1]);
+            int row = Integer.parseInt(aux[2]);
+            int col = Integer.parseInt(aux[3]);
+            System.out.println("row "+row);
+            System.out.println("col "+col);
+            System.out.println("val "+val);
+            tablero.setElement(row, col, val);
+            gui.setDatos(tablero, soluciones);
+            gui.repintar(0);
+        }
+        
     }
 }
