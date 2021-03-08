@@ -25,6 +25,7 @@ public class SudokuBB {
     public Gui gui;
     public Tablero tablero;
     public Soluciones soluciones;
+    private int NXJUAN;
     private int dim;
     private int pistas;
     public static void main(String[] args) {
