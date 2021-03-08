@@ -205,6 +205,12 @@ public class Tablero {
         tablero[row][column] = value;
     }
     
+    public void addPista(){
+        this.pistas++;
+        this.casillas_por_poner--;
+        
+    }
+    
     
     //TODO Comprobar que esta función va bien.
     

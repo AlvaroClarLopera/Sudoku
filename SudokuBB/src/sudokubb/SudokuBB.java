@@ -137,6 +137,7 @@ public class SudokuBB {
             System.out.println("col "+col);
             System.out.println("val "+val);
             tablero.setElement(row, col, val);
+            tablero.addPista();
             gui.setDatos(tablero, soluciones);
             gui.repintar(0);
         }
