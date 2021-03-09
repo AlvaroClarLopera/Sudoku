@@ -54,7 +54,6 @@ public class Tablero {
             }
         }
         this.pistas = pistas;
-        System.out.println(this.pistas);
         casillas_por_poner = casillas_totales - this.pistas;
         this.rellenar_con_pistas();
         

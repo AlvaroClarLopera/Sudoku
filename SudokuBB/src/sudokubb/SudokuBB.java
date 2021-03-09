@@ -133,7 +133,6 @@ public class SudokuBB {
             int val = Integer.parseInt(aux[1]);
             int row = Integer.parseInt(aux[2]);
             int col = Integer.parseInt(aux[3]);
-            System.out.println(tablero.editable(row,col));
             if (tablero.editable(row, col)){
                 tablero.setElement(row, col, val);
                 tablero.addPista();
