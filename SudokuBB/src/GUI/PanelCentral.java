@@ -80,7 +80,6 @@ public class PanelCentral extends JPanel implements MouseListener,ActionListener
                     g2d.setStroke(new BasicStroke(1));
                     g.drawRect(j * ancho, i * alto, ancho, alto);
                     if (tab.getElement(i, j) != 0) {
-                        System.out.println("mamama");
                         if (tab.editable(i, j)) g.setColor(Color.BLUE);
                         else g.setColor(Color.BLACK);
                         g.drawString(String.valueOf(tab.getElement(i, j)), j * ancho + offset_ancho, i * alto + alto - offset_altura);
