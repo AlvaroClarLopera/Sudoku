@@ -21,6 +21,7 @@ public class Tablero {
     private int casillas_puestas = 0; // cantidad de casillas puestas en el BT del sudoku
     
     private int [][] tablero;
+    private boolean [][] noeditable;
 
     public Tablero() {}
     
@@ -31,6 +32,7 @@ public class Tablero {
         this.casillas_puestas = tab.casillas_puestas;
         this.casillas_totales = tab.casillas_totales;
         this.pistas = tab.pistas;
+        this.noeditable = new boolean[this.DIMENSION][this.DIMENSION];
         this.tablero = new int [this.DIMENSION][this.DIMENSION];
         for (int i = 0; i < this.DIMENSION; i++) {
             for (int j = 0; j < this.DIMENSION; j++) {
@@ -45,12 +47,14 @@ public class Tablero {
         casillas_totales = DIMENSION * DIMENSION;
         POSIBLES_VALORES = DIMENSION;
         tablero = new int[DIMENSION][DIMENSION];
+        noeditable = new boolean [DIMENSION][DIMENSION];
         for (int[] u: tablero) {
             for (int elem: u) {             
                 elem = 0;
             }
         }
         this.pistas = pistas;
+        System.out.println(this.pistas);
         casillas_por_poner = casillas_totales - this.pistas;
         this.rellenar_con_pistas();
         
@@ -257,6 +261,10 @@ public class Tablero {
     public int getDIMENSION() {
         return DIMENSION;
     }
+    
+    public boolean editable(int row, int col){
+        return !noeditable[row][col];
+    }
 
     private void rellenar_con_pistas() {
         int pistas_a_colocar = pistas;
@@ -279,6 +287,7 @@ public class Tablero {
             //mientras no encontremos una casilla libre
             random_numero = random.nextInt(DIMENSION) + 1;
             tablero[random_fila][random_columna] = random_numero;
+            noeditable[random_fila][random_columna] = true;
             while (!(this.comprobarElemento(random_fila, random_columna))) {
                 random_numero = random.nextInt(DIMENSION) + 1;
                 tablero[random_fila][random_columna] = random_numero;
@@ -286,9 +295,7 @@ public class Tablero {
             }       
             pistas_colocadas++;
         }
-        
-        
-             
+                  
         
     }
     

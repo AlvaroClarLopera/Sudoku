@@ -10,6 +10,7 @@ import Datos.Soluciones;
 import Datos.Tablero;
 import GUI.Gui;
 import GUI.Modal;
+import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -121,9 +122,8 @@ public class SudokuBB {
             ventNivel.setVisible(true);
         } else if (s.startsWith("modal:pistas-")) {
             String aux = s.substring(s.indexOf("-") + 1);
-//            tablero = new Tablero(Integer.parseInt(aux));
             pistas = Integer.parseInt(aux);
-            if (pistas > dim*dim/2) pistas = dim*dim/2;
+            if (pistas >= dim*dim/2) pistas = dim*dim/2;
             tablero = new Tablero(dim,pistas);
             soluciones = new Soluciones(500);
             gui.setDatos(tablero,soluciones);
@@ -133,10 +133,15 @@ public class SudokuBB {
             int val = Integer.parseInt(aux[1]);
             int row = Integer.parseInt(aux[2]);
             int col = Integer.parseInt(aux[3]);
-            tablero.setElement(row, col, val);
-            tablero.addPista();
-            gui.setDatos(tablero, soluciones);
-            gui.repintar(0);
+            System.out.println(tablero.editable(row,col));
+            if (tablero.editable(row, col)){
+                tablero.setElement(row, col, val);
+                tablero.addPista();
+                gui.setDatos(tablero, soluciones);
+                gui.repintar(0);
+            }
+
+
         }
         
     }
